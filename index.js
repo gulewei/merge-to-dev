@@ -7,20 +7,26 @@ const process = require('process');
 const spawnSync = (command, args) => spawn.sync(command, args, { stdio: 'inherit' });
 
 module.exports = function mergeToDev(msg, target = 'dev') {
-    console.log('args', msg, target);
-
     getGitBranchName(process.cwd(), function(err, branchName) {
         if (msg) {
+            console.log('🍺:::: add all files ::::🍺');
             spawnSync('git', [ 'add', '.' ]);
+            console.log(`🍺:::: commit with message "${msg}" ::::🍺`);
             spawnSync('git', [ 'commit', `-m"${msg}"` ]);
-            // spawnSync('git', [ 'push' ]);
+            console.log(`⬆️:::: push branch [${branchName}] ::::⬆️`);
+            spawnSync('git', [ 'push' ]);
         }
 
+        console.log(`🍺:::: checkout to branch [${target}] ::::🍺`);
         spawnSync('git', [ 'checkout', target ]);
-        // spawnSync('git', [ 'pull' ]);
+        console.log(`⬇️:::: pull branch [${target}] ::::⬇️`);
+        spawnSync('git', [ 'pull' ]);
+        console.log(`🍺:::: merge [${branchName}] into [${target}] ::::🍺`);
         spawnSync('git', [ 'merge', branchName ]);
 
-        // spawnSync('git', [ 'push' ]);
+        console.log(`⬆️:::: push branch [${target}] ::::⬆️`);
+        spawnSync('git', [ 'push' ]);
+        console.log(`🍺:::: checkout to branch [${branchName}] ::::🍺`);
         spawnSync('git', [ 'checkout', branchName ]);
     });
 };
