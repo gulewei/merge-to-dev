@@ -12,14 +12,14 @@ module.exports = function mergeToDev(msg, target = 'dev') {
         if (msg) {
             spawnSync('git', [ 'add', '.' ]);
             spawnSync('git', [ 'commit', `-m="${msg}"` ]);
-            spawnSync('git', [ 'push' ]);
+            // spawnSync('git', [ 'push' ]);
         }
 
         spawnSync('git', [ 'checkout', target ]);
-        spawnSync('git', [ 'pull' ]);
+        // spawnSync('git', [ 'pull' ]);
         spawnSync('git', [ 'merge', branchName ]);
 
-        spawnSync('git', [ 'push' ]);
+        // spawnSync('git', [ 'push' ]);
         spawnSync('git', [ 'checkout', branchName ]);
     });
 };
