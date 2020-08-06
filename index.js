@@ -1,14 +1,15 @@
 const path = require('path');
 const getGitBranchName = require('git-branch-name');
 const spawn = require('cross-spawn');
-
-var dirPath = path.resolve(__dirname, '../');
+const process = require('process');
 
 // Spawn NPM synchronously
 const spawnSync = (command, args) => spawn.sync(command, args, { stdio: 'inherit' });
 
 module.exports = function mergeToDev(msg, target = 'dev') {
-    getGitBranchName(dirPath, function(err, branchName) {
+    console.log('args', msg, target);
+
+    getGitBranchName(process.cwd(), function(err, branchName) {
         if (msg) {
             spawnSync('git', [ 'add', '.' ]);
             spawnSync('git', [ 'commit', `-m"${msg}"` ]);
