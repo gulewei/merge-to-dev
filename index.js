@@ -11,7 +11,7 @@ module.exports = function mergeToDev(msg, target = 'dev') {
     getGitBranchName(dirPath, function(err, branchName) {
         if (msg) {
             spawnSync('git', [ 'add', '.' ]);
-            spawnSync('git', [ 'commit', `-m="${msg}"` ]);
+            spawnSync('git', [ 'commit', `-m"${msg}"` ]);
             // spawnSync('git', [ 'push' ]);
         }
 

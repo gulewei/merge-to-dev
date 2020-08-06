@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "easily merge current git branch into dev",
   "main": "index.js",
-  "bin": "bin.js",
+  "bin": {
+    "merge-to-dev": "bin.js",
+    "mgdev": "bin.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
